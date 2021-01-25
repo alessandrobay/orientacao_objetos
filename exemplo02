@@ -1,0 +1,76 @@
+package aplicacao;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+import entidade.Classe;
+
+public class Programa {
+
+	public static void main(String[] args) {
+
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		Classe produto = new Classe();
+
+		System.out.println(" escreva as características do produto:");
+		System.out.println("nome do produto.");
+		produto.nome = sc.nextLine();
+
+		System.out.println("preço do produto.");
+		produto.preco = sc.nextDouble();
+
+		System.out.println("a quantidade do produto.");
+		produto.quantidade = sc.nextInt();
+
+		System.out.println("informações do produto: " + produto);
+
+		System.out.println();
+		System.out.println("adicione mais produtos no estoque.");
+		int quantidade = sc.nextInt();
+		produto.adcionarEstoque(quantidade);
+
+		System.out.println();
+		System.out.println("informações do produto: " + produto);
+
+		System.out.println();
+		System.out.println("remova a quantidade do produto.");
+		quantidade = sc.nextInt();
+
+		produto.removerEstoque(quantidade);
+		System.out.println("informações do produto: " + produto);
+
+		sc.close();
+	}
+
+}
+
+
+----------------------------------------------------------------------
+
+package entidade;
+
+public class Classe {
+
+	public String nome;
+	public double preco;
+	public int quantidade;
+
+	public double valorTotal() {
+		return preco * quantidade;
+	}
+
+	public void adcionarEstoque(int quantidade) {
+		this.quantidade += quantidade;
+	}
+
+	public void removerEstoque(int quantidade) {
+		this.quantidade -= quantidade;
+	}
+
+	public String toString() {
+		return "nome=" + nome + ", preco= $" + String.format("%.2f", preco) + ", quantidade=" + quantidade
+				+ ", valorTotal()=" + valorTotal();
+	}
+
+}
