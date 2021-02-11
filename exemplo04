@@ -1,0 +1,109 @@
+package aplicacao;
+
+import java.util.Locale;
+import java.util.Scanner;
+import entidade.Classe;
+
+public class Programa {
+
+	public static void main(String[] args) {
+
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+
+		Classe conta;
+
+		System.out.println("digite o número da conta");
+		int numConta = sc.nextInt();
+
+		System.out.println(" digite o nome do cliente");
+		sc.nextLine();
+		String nome = sc.nextLine();
+
+		System.out.println(" se for ter um deposito digite s para SIM ou n para NÃO");
+		char resposta = sc.next().charAt(0);
+
+		if (resposta == 's') {
+			System.out.println("digite o depósito");
+			double saldo = sc.nextDouble();
+			conta = new Classe(numConta, nome, saldo);
+		} else {
+			conta = new Classe(numConta, nome);
+		}
+
+		System.out.println();
+		System.out.println("dados");
+		System.out.println();
+		System.out.println(conta);
+
+		System.out.println();
+		System.out.println("faça um deposito");
+		double saldo = sc.nextDouble();
+		conta.deposito(saldo);
+		System.out.println(conta);
+
+		System.out.println("faça uma retirada");
+		saldo = sc.nextDouble();
+		conta.retirada(saldo);
+		System.out.println(conta);
+
+		sc.close();
+	}
+}
+
+--------------------------------------------------------
+
+
+package entidade;
+
+public class Classe {
+
+	private int numConta;
+	private String nome;
+	private double saldo;
+
+	public Classe() {
+
+	}
+
+	public Classe(int numConta, String nome, double saldo) {
+		this.numConta = numConta;
+		this.nome = nome;
+		this.saldo = saldo;
+	}
+
+	public Classe(int numConta, String nome) {
+		this.numConta = numConta;
+		this.nome = nome;
+	}
+
+	public int getNumConta() {
+		return numConta;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void deposito(double saldo) {
+		this.saldo += saldo;
+	}
+
+	public void retirada(double saldo) {
+		this.saldo -= saldo + 5.0;
+	}
+
+	@Override
+	public String toString() {
+		return "Conta =" + numConta + ", cliente =" + nome + ", saldo =" + saldo;
+	}
+
+}
