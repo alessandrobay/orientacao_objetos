@@ -1,0 +1,110 @@
+package aplicacao;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+import entidade.Classe;
+
+public class Programa {
+
+	public static void main(String[] args) {
+
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("digite o nome");
+		String nome = sc.nextLine();
+
+		System.out.println("digite o preço");
+		double preco = sc.nextDouble();
+
+		System.out.println("digite a quantidade");
+		int quantidade = sc.nextInt();
+
+		Classe produto = new Classe(nome, preco, quantidade);
+
+		System.out.println(produto);
+		System.out.println();
+
+		System.out.println("digite a adição do produto");
+		quantidade = sc.nextInt();
+		produto.adicionar(quantidade);
+
+		System.out.println(produto);
+		System.out.println();
+
+		System.out.println(" digite a retirada do produto");
+		quantidade = sc.nextInt();
+		produto.retirada(quantidade);
+
+		System.out.println(produto);
+
+		sc.close();
+	}
+}
+
+---------------------------------------------------------------
+
+
+package entidade;
+
+public class Classe {
+
+	private String nome;
+	public double preco;
+	public int quantidade;
+
+	public Classe() {
+
+	}
+
+	public Classe(String nome, double preco, int quantidade) {
+		this.nome = nome;
+		this.preco = preco;
+		this.quantidade = quantidade;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public double valorTotalEstoque() {
+		return preco * quantidade;
+
+	}
+
+	public void adicionar(int quantidade) {
+		this.quantidade += quantidade;
+	}
+
+	public void retirada(int quantidade) {
+		this.quantidade -= quantidade;
+	}
+
+	@Override
+	public String toString() {
+		return "Classe [nome=" + nome + ", preco=" + preco + ", quantidade=" + quantidade + ", valor estoque ="
+				+ valorTotalEstoque() + "]";
+	}
+
+}
